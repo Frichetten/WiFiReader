@@ -40,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
             int size = wifiScanList.size();
             Log.d("Result", String.valueOf(size));
         }
+
+        if(true){
+
+        }
     }
 
     class WifiScanReciever extends BroadcastReceiver{
