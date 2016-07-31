@@ -28,10 +28,9 @@ public class findNetworks extends AppCompatActivity {
 
         lv = (ListView) findViewById(R.id.findNetworkListView);
         List<ScanResult> scanResults = findNetworks();
-        ArrayList<String> results = new ArrayList<>();
-        for(int i=0;i<scanResults.size();i++){
-            results.add(scanResults.get(i).toString());
-        }
+
+        //Clean the scanResults into results.
+        ArrayList<String> results = cleanResults(scanResults);
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                 this,
@@ -41,9 +40,37 @@ public class findNetworks extends AppCompatActivity {
         lv.setAdapter(arrayAdapter);
     }
 
+    private ArrayList<String> cleanResults(List<ScanResult> scanResults){
+        ArrayList<String> results = new ArrayList<>();
+        for(int i=0;i<scanResults.size();i++){
+            String temp = scanResults.get(i).toString();
+            String hold = "";
+            Log.d("Result",temp);
+            //Adding the SSID
+            if (temp.substring(0,temp.indexOf(",")).length() <= 6)
+                hold = hold + "SSID: *HIDDEN*";
+            else
+                hold = hold + temp.substring(0,temp.indexOf(","));
+            //Adding BSSID
+            temp = temp.substring(temp.indexOf(",")+1);
+            hold = hold + ", " + temp.substring(0,temp.indexOf(","));
+            //Adding capabilities
+            temp = temp.substring(temp.indexOf(",")+1);
+            temp = temp.substring(temp.indexOf(",")+1);
+            hold = hold + ", " + temp.substring(0,temp.indexOf(","));
+            //Adding level
+            temp = temp.substring(temp.indexOf(",")+1);
+            hold = hold + ", " + temp.substring(0,temp.indexOf(","));
+
+            results.add(hold);
+        }
+        return results;
+    }
+
     private List<ScanResult> findNetworks(){
         //Creating the wifi managing objects
         WifiManager wim = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        wim.startScan();
         WifiScanReceiver wifiReceiver = new WifiScanReceiver();
         registerReceiver(wifiReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
 
