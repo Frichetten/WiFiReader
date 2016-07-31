@@ -20,10 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".findNetworks"
-            android:label="@string/title_activity_find_networks"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".findNetworks"></activity>
     </application>
 
 </manifest>

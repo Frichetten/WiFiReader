@@ -33,35 +33,10 @@ public class MainActivity extends AppCompatActivity {
         findNetworks.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                findNetworks();
                 Intent i = new Intent(getApplicationContext(), findNetworks.class);
                 startActivity(i);
             }
         });
-    }
-
-    private void findNetworks(){
-        //Creating the wifi managing objects
-        WifiManager wim = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-        WifiScanReceiver wifiReceiver = new WifiScanReceiver();
-        registerReceiver(wifiReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
-
-        //Checking permissions. If there is none, get them. If there is, perform action
-        if (checkSelfPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION}, 0x12345);
-        }
-        else{
-            List<ScanResult> wifiScanList = wim.getScanResults();
-            String data = wifiScanList.get(0).toString();
-            int size = wifiScanList.size();
-            for(int i=0;i<size;i++) {
-                Log.d("Result", wifiScanList.get(i).toString());
-            }
-        }
-    }
-    class WifiScanReceiver extends BroadcastReceiver{
-        public void onReceive(Context c, Intent intent){
-        }
     }
 }
 
