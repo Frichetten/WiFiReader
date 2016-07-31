@@ -45,7 +45,6 @@ public class findNetworks extends AppCompatActivity {
         for(int i=0;i<scanResults.size();i++){
             String temp = scanResults.get(i).toString();
             String hold = "";
-            Log.d("Result",temp);
             //Adding the SSID
             if (temp.substring(0,temp.indexOf(",")).length() <= 6)
                 hold = hold + "SSID: *HIDDEN*";

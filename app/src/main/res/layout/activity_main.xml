@@ -17,4 +17,20 @@
         android:id="@+id/findNetworkButton"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get IP"
+        android:id="@+id/getIPButton"
+        android:layout_alignTop="@+id/findNetworkButton"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Port Scan"
+        android:id="@+id/portScanButton"
+        android:layout_alignTop="@+id/getIPButton"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>
